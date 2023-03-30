@@ -8,6 +8,7 @@ userRouter.post("/register", (req,res)=>{
     const {email,password,name,gender}=req.body
         bcrypt.hash(password, 3, function(err, hash) {
             const new_data = new UserModel({email:email,password:hash,name:name,gender:gender})
+            localStorage.setItem("UserData",{name:name,gender:gender,email:email})
             new_data.save()
         });
         res.send({"msg":"new data is posted"})
